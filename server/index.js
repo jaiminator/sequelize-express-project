@@ -3,7 +3,6 @@ const port = 8000;
 const cors = require("cors");
 const express = require("express");
 const db = require("./db");
-
 const booksRouter = require("./routes/books.routes");
 
 const main = () => {
@@ -11,8 +10,8 @@ const main = () => {
   app.use(cors());
   app.use(express.json());
 
-  db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
+  db.sequelize.sync().then(() => {
+    console.log("Re-sync db.");
   });
 
   app.use("/books", booksRouter);
