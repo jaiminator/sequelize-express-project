@@ -1,14 +1,13 @@
-const { Sequelize } = require("sequelize");
-const defineBookModel = require("./models/Book")
+const { Sequelize } = require("sequelize"); //IMPORT SEQUELIZE
 
+//CREATE NEW CONNECTION WITH SEQUELIZE
 const sequelize = new Sequelize("pruebadb", "root", "root", {
   host: "localhost",
   dialect: "mysql",
 })
 
-const db = {}
-db.books = defineBookModel(sequelize);
+//CREATE OBJECT db
+const db = {};
 db.sequelize = sequelize;
 
-
-module.exports = db;
+module.exports = db;  //EXPORT OBJECT db

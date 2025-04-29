@@ -1,10 +1,11 @@
-const port = 8000;
+const port = 8000; //DECLARE PORT
 
-const cors = require("cors");
-const express = require("express");
-const db = require("./db");
-const booksRouter = require("./routes/books.routes");
+const cors = require("cors"); //IMPORT CORS
+const express = require("express"); //IMPORT EXPRESS
+const db = require("./db"); //IMPORT DB
+const booksRouter = require("./routes/books.routes"); //IMPORT ROUTES
 
+//INITIALIZE EXPRESS
 const main = () => {
   const app = express();
   app.use(cors());
