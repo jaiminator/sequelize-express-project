@@ -17,9 +17,9 @@ const getBook = async (req, res) => {
 
 const createBook = async (req, res) => {
     const createdBook = await Book.create({
-        title: "Don Quijote",
-        description: "Literatura clásica universal",
-        length: 450
+        title: "Hacia mareas malditas",
+        description: "Fantasía",
+        length: 407
     });
     res.status(200).send(`Book created with id: ${createdBook.id}...`);
 }

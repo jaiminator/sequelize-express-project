@@ -1,79 +1,84 @@
 // CLIENTE
 const BASE_URL = "http://localhost:8000";
 
-const inputAnimal = document.getElementById("inputAnimal");
-const inputStrength = document.getElementById("inputStrength");
+const inputTitle = document.getElementById("inputTitle");
+const inputDescription = document.getElementById("inputDescription");
+const inputLength = document.getElementById("inputLength");
 const btnCreate = document.getElementById("btnCreate");
 
-const createAnimal = () => {
-  const animalToCreate = inputAnimal.value;
-  const strengthToCreate = Number(inputStrength.value);
+const createBook = () => {
+  const bookToCreate = inputTitle.value;
+  const descriptionToCreate = inputDescription.value;
+  const lengthToCreate = Number(inputLength.value);
 
-  fetch(BASE_URL + "/animals", {
+  fetch(BASE_URL + "/books", {
     headers: {
       "Content-Type": "application/json",
     },
     method: "POST",
     body: JSON.stringify({
-      name: animalToCreate,
-      strength: strengthToCreate,
+      title: bookToCreate,
+      description: descriptionToCreate,
+      length: lengthToCreate
     }),
   }).then(() => {
-    inputAnimal.value = "";
-    inputStrength.value = "";
-    getAnimals();
+    inputTitle.value = "";
+    inputDescription.value = "";
+    inputLength.value = "";
+    getBooks();
   });
 };
 
-const getAnimals = () => {
-  fetch(BASE_URL + "/animals")
+const getBooks = () => {
+  fetch(BASE_URL + "/books")
     .then((res) => res.json())
-    .then((animals) => {
-      const animalsContainer = document.getElementById("animalsContainer");
-      animalsContainer.innerHTML = "";
+    .then((books) => {
+      const booksContainer = document.getElementById("booksContainer");
+      booksContainer.innerHTML = "";
 
-      animals.forEach((animal) => {
-        animalsContainer.innerHTML += `
-          <h2>${animal.name} - F: ${
-          animal.strength
-        } <button onclick="deleteAnimal(${
-          animal.id
-        })">Eliminar</button> <button onclick='updateAnimal(${JSON.stringify(
-          animal
-        )})'>Modificar</button> </h2>
-        `;
+      books.forEach((book) => {
+        booksContainer.innerHTML += `
+          <h2>${book.title} - F: ${
+          book.description
+        }`;
+        /*  <button onclick="deleteBook(${
+          book.id
+        })">Eliminar</button> <button onclick='updateBook(${JSON.stringify(
+          book
+        )})'>Modificar</button> </h2> */
       });
     });
 };
 
-const deleteAnimal = (animalId) => {
-  fetch(BASE_URL + "/animals/" + animalId, {
+/* const deletebook = (bookId) => {
+  fetch(BASE_URL + "/books/" + bookId, {
     method: "DELETE",
-  }).then(() => getAnimals());
+  }).then(() => getbooks());
 };
 
-const updateAnimal = (animal) => {
-  const nameToUpdate = prompt("Ingrese un nuevo nombre", animal.name);
-  const strengthToUpdate = prompt("Ingrese una nueva fuerza", animal.strength);
-  const idToUpdate = animal.id;
-  if(!nameToUpdate || !strengthToUpdate){
-    alert("Por favor ingrese nombre y fuerza");
+const updatebook = (book) => {
+  const bookToCreate = prompt("Ingrese un nuevo nombre", book.title);
+  const descriptionToCreate = prompt("Ingrese una nueva fuerza", book.description);
+  const idToUpdate = book.id;
+  if(!bookToCreate || !descriptionToCreate){
+    alert("Por favor ingrese título y descripción");
     return;
   }
-  fetch(BASE_URL + `/animals/${idToUpdate}`, {
+  fetch(BASE_URL + `/books/${idToUpdate}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: nameToUpdate,
-      strength: strengthToUpdate,
+      title: bookToCreate,
+      description: descriptionToCreate,
+      length: lengthToCreate
     }),
   }).then(() => {
-    alert(`Animal ${animal.name} actualizado a ${nameToUpdate}`);
-    getAnimals();
+    alert(`book ${book.title} actualizado a ${bookToUpdate}`);
+    getbooks();
   });
-};
+}; */
 
-btnCreate.addEventListener("click", createAnimal);
-getAnimals();
+btnCreate.addEventListener("click", createBook);
+getBooks();
